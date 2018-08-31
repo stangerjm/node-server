@@ -1,0 +1,20 @@
+{
+  "name": "node-server",
+  "version": "1.0.0",
+  "description": "test node server that will allow database connections",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx nodemon app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "mongoose": "^5.2.2",
+    "morgan": "^1.9.0",
+    "nodemon": "^1.18.0"
+  }
+}
