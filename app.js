@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const morgan = require('morgan');
 const Person = require('./models/person');
+const Region = require('./models/region');
 const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost:27017/people');
@@ -79,6 +80,78 @@ app.delete('/people/:id', (req, res) => {
   Person.remove({
     _id: req.params.id
   }, function(err, person) {
+    if(err) {
+      res.send(err);
+    }
+
+    res.send({
+      success: true
+    })
+  })
+});
+
+app.post('/region', (req, res) => {
+  let name = req.body.name;
+  let code = req.body.code;
+  let new_region = new Region({
+    name: name,
+    code: code
+  });
+
+  new_region.save(function(error, region) {
+    if (error) {
+      console.error(error);
+    }
+
+    res.send(region)
+  })
+});
+
+app.get('/region', (req, res) => {
+  Region.find({}, function(err, regions) {
+    if (err) {
+      console.error(err);
+    }
+
+    res.send({
+      regions: regions
+    });
+
+  }).sort({_id:-1})
+});
+
+app.get('/region/:id', (req, res) => {
+  Region.findById(req.params.id, function(err, region) {
+    if (err) {
+      console.error(err);
+    }
+
+    res.send(region);
+  })
+});
+
+app.put('/region/:id', (req, res) => {
+  Region.findById(req.params.id, function(err, region) {
+    if (err) {
+      console.error(err);
+    }
+
+    region.name = req.body.name;
+    region.code = req.body.code;
+    region.save(function(err, updatedRegion) {
+      if(err) {
+        console.error(err);
+      }
+
+      res.send(updatedRegion)
+    })
+  })
+});
+
+app.delete('/region/:id', (req, res) => {
+  Region.remove({
+    _id: req.params.id
+  }, function(err, region) {
     if(err) {
       res.send(err);
     }
