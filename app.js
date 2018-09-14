@@ -21,9 +21,14 @@ app.use(cors());
 app.post('/people', (req, res) => {
   let name = req.body.name;
   let age = req.body.age;
+  let birthday = req.body.birthday;
+  let isEmployee = req.body.isEmployee;
+
   let new_person = new Person({
     name: name,
-    age: age
+    age: age,
+    birthday: birthday,
+    isEmployee: isEmployee
   });
 
   new_person.save(function(error, person) {
@@ -66,6 +71,9 @@ app.put('/people/:id', (req, res) => {
 
     person.name = req.body.name;
     person.age = req.body.age;
+    person.birthday = req.body.birthday;
+    person.isEmployee = req.body.isEmployee;
+
     person.save(function(err, updatedPerson) {
       if(err) {
         console.error(err);
