@@ -23,12 +23,14 @@ app.post('/people', (req, res) => {
   let age = req.body.age;
   let birthday = req.body.birthday;
   let isEmployee = req.body.isEmployee;
+  let address = req.body.address;
 
   let new_person = new Person({
     name: name,
     age: age,
     birthday: birthday,
-    isEmployee: isEmployee
+    isEmployee: isEmployee,
+    address: address
   });
 
   new_person.save(function(error, person) {
@@ -73,6 +75,7 @@ app.put('/people/:id', (req, res) => {
     person.age = req.body.age;
     person.birthday = req.body.birthday;
     person.isEmployee = req.body.isEmployee;
+    person.address = req.body.address;
 
     person.save(function(err, updatedPerson) {
       if(err) {

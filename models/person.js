@@ -5,7 +5,8 @@ let PostSchema = new Schema({
   name: String,
   age: Number,
   birthday: Date,
-  isEmployee: Boolean
+  isEmployee: Boolean,
+  address: String
 });
 
 let Person = mongoose.model("Person", PostSchema);
